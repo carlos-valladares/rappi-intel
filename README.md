@@ -27,7 +27,7 @@ Sistema automatizado de inteligencia competitiva para comparar **Rappi vs Uber E
 ### Instalacion
 
 ```bash
-git clone <url-del-repo>
+git clone https://github.com/carlos-valladares/rappi-intel.git
 cd rappi-intel
 pip install -r requirements.txt
 playwright install chromium
