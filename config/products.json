@@ -1,0 +1,84 @@
+{
+  "fast_food": [
+    {
+      "id": "big_mac",
+      "name": "Big Mac",
+      "restaurant": "McDonald's",
+      "search_terms": ["Big Mac", "big mac"],
+      "vertical": "fast_food"
+    },
+    {
+      "id": "combo_mediano_mcdonalds",
+      "name": "Combo Mediano McDonald's",
+      "restaurant": "McDonald's",
+      "search_terms": ["Combo Mediano", "McCombo mediano", "combo 1"],
+      "vertical": "fast_food"
+    },
+    {
+      "id": "mcnuggets_10",
+      "name": "McNuggets 10 piezas",
+      "restaurant": "McDonald's",
+      "search_terms": ["McNuggets 10", "Nuggets 10 piezas"],
+      "vertical": "fast_food"
+    },
+    {
+      "id": "whopper",
+      "name": "Whopper",
+      "restaurant": "Burger King",
+      "search_terms": ["Whopper", "whopper sencillo"],
+      "vertical": "fast_food"
+    },
+    {
+      "id": "combo_whopper",
+      "name": "Combo Whopper",
+      "restaurant": "Burger King",
+      "search_terms": ["Combo Whopper", "Whopper Combo"],
+      "vertical": "fast_food"
+    }
+  ],
+  "retail": [
+    {
+      "id": "coca_500ml",
+      "name": "Coca-Cola 500ml",
+      "store_type": "convenience",
+      "search_terms": ["Coca-Cola 500", "Coca Cola 500ml", "refresco coca 500"],
+      "vertical": "retail"
+    },
+    {
+      "id": "agua_1l",
+      "name": "Agua embotellada 1L",
+      "store_type": "convenience",
+      "search_terms": ["Agua 1 litro", "agua embotellada 1l", "Bonafont 1L", "Ciel 1L"],
+      "vertical": "retail"
+    },
+    {
+      "id": "panales_pampers",
+      "name": "Pañales Pampers (paquete)",
+      "store_type": "supermarket",
+      "search_terms": ["Pampers", "pañales Pampers", "Pampers etapa"],
+      "vertical": "retail"
+    }
+  ],
+  "target_restaurants": {
+    "mcdonalds": {
+      "ubereats_search": "McDonald's",
+      "didifood_search": "McDonald's",
+      "rappi_search": "McDonald's"
+    },
+    "burger_king": {
+      "ubereats_search": "Burger King",
+      "didifood_search": "Burger King",
+      "rappi_search": "Burger King"
+    },
+    "oxxo": {
+      "ubereats_search": "OXXO",
+      "didifood_search": "OXXO",
+      "rappi_search": "OXXO"
+    },
+    "seven_eleven": {
+      "ubereats_search": "7-Eleven",
+      "didifood_search": "7-Eleven",
+      "rappi_search": "7-Eleven"
+    }
+  }
+}

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/graphml"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:y="http://www.yworks.com/xml/graphml"
+         xsi:schemaLocation="http://graphml.graphdrawing.org/graphml http://www.yworks.com/xml/schema/graphml/1.1/ygraphml.xsd">
+
+  <key for="node" id="d0" yfiles.type="nodegraphics"/>
+  <key for="edge" id="d1" yfiles.type="edgegraphics"/>
+
+  <graph id="G" edgedefault="directed">
+
+    <!-- CLI / Orquestador -->
+    <node id="main">
+      <data key="d0">
+        <y:ShapeNode>
+          <y:Geometry x="300" y="20" width="200" height="50"/>
+          <y:Fill color="#C0392B" transparent="false"/>
+          <y:BorderStyle color="#922B21" type="line" width="2.0"/>
+          <y:NodeLabel alignment="center" fontFamily="Arial" fontSize="13" fontStyle="bold" textColor="#FFFFFF">main.py&#10;CLI Orquestador</y:NodeLabel>
+          <y:Shape type="roundrectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+
+    <!-- ScraperBase -->
+    <node id="base">
+      <data key="d0">
+        <y:ShapeNode>
+          <y:Geometry x="300" y="130" width="200" height="50"/>
+          <y:Fill color="#7F8C8D" transparent="false"/>
+          <y:BorderStyle color="#566573" type="line" width="2.0"/>
+          <y:NodeLabel alignment="center" fontFamily="Arial" fontSize="12" fontStyle="bold" textColor="#FFFFFF">scrapers/base.py&#10;ScraperBase (ABC)</y:NodeLabel>
+          <y:Shape type="roundrectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+
+    <!-- Rappi Scraper -->
+    <node id="rappi">
+      <data key="d0">
+        <y:ShapeNode>
+          <y:Geometry x="60" y="250" width="160" height="70"/>
+          <y:Fill color="#FF6900" transparent="false"/>
+          <y:BorderStyle color="#CC5500" type="line" width="2.0"/>
+          <y:NodeLabel alignment="center" fontFamily="Arial" fontSize="11" fontStyle="bold" textColor="#FFFFFF">scrapers/rappi.py&#10;RappiScraper&#10;(100% API)&#10;Login implementado</y:NodeLabel>
+          <y:Shape type="roundrectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+
+    <!-- UberEats Scraper -->
+    <node id="ubereats">
+      <data key="d0">
+        <y:ShapeNode>
+          <y:Geometry x="320" y="250" width="160" height="70"/>
+          <y:Fill color="#142328" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="2.0"/>
+          <y:NodeLabel alignment="center" fontFamily="Arial" fontSize="11" fontStyle="bold" textColor="#FFFFFF">scrapers/ubereats.py&#10;UberEatsScraper&#10;(API + HTML)&#10;Login pendiente</y:NodeLabel>
+          <y:Shape type="roundrectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+
+    <!-- DiDi Food Scraper -->
+    <node id="didi">
+      <data key="d0">
+        <y:ShapeNode>
+          <y:Geometry x="580" y="250" width="160" height="70"/>
+          <y:Fill color="#FF8000" transparent="false"/>
+          <y:BorderStyle color="#CC6600" type="line" width="2.0"/>
+          <y:NodeLabel alignment="center" fontFamily="Arial" fontSize="11" fontStyle="bold" textColor="#FFFFFF">scrapers/didifood.py&#10;DidiScraper&#10;(HTML SSR)&#10;1 scraping/corrida</y:NodeLabel>
+          <y:Shape type="roundrectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+
+    <!-- Playwright Browser -->
+    <node id="playwright">
+      <data key="d0">
+        <y:ShapeNode>
+          <y:Geometry x="300" y="390" width="200" height="50"/>
+          <y:Fill color="#2E86AB" transparent="false"/>
+          <y:BorderStyle color="#1A5276" type="line" width="2.0"/>
+          <y:NodeLabel alignment="center" fontFamily="Arial" fontSize="12" fontStyle="bold" textColor="#FFFFFF">Playwright Chromium&#10;(Stealth + Geoloc)</y:NodeLabel>
+          <y:Shape type="roundrectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+
+    <!-- APIs externas -->
+    <node id="rappi_api">
+      <data key="d0">
+        <y:ShapeNode>
+          <y:Geometry x="20" y="500" width="180" height="60"/>
+          <y:Fill color="#FEF9E7" transparent="false"/>
+          <y:BorderStyle color="#FF6900" type="line" width="2.0"/>
+          <y:NodeLabel alignment="center" fontFamily="Arial" fontSize="10" textColor="#333333">Rappi API&#10;mxgrability.rappi.com&#10;/rocket/v2/login&#10;/store/id/{id}/</y:NodeLabel>
+          <y:Shape type="roundrectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+
+    <node id="ue_api">
+      <data key="d0">
+        <y:ShapeNode>
+          <y:Geometry x="300" y="500" width="180" height="60"/>
+          <y:Fill color="#FEF9E7" transparent="false"/>
+          <y:BorderStyle color="#142328" type="line" width="2.0"/>
+          <y:NodeLabel alignment="center" fontFamily="Arial" fontSize="10" textColor="#333333">UberEats API&#10;ubereats.com/_p/api&#10;/getFeedV1&#10;/getStoreV1</y:NodeLabel>
+          <y:Shape type="roundrectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+
+    <node id="didi_web">
+      <data key="d0">
+        <y:ShapeNode>
+          <y:Geometry x="580" y="500" width="180" height="60"/>
+          <y:Fill color="#FEF9E7" transparent="false"/>
+          <y:BorderStyle color="#FF8000" type="line" width="2.0"/>
+          <y:NodeLabel alignment="center" fontFamily="Arial" fontSize="10" textColor="#333333">DiDi Food Web&#10;web.didiglobal.com&#10;HTML SSR (nombre+rating)&#10;Fees: solo app movil</y:NodeLabel>
+          <y:Shape type="roundrectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+
+    <!-- Storage -->
+    <node id="duckdb">
+      <data key="d0">
+        <y:ShapeNode>
+          <y:Geometry x="160" y="630" width="160" height="50"/>
+          <y:Fill color="#27AE60" transparent="false"/>
+          <y:BorderStyle color="#1E8449" type="line" width="2.0"/>
+          <y:NodeLabel alignment="center" fontFamily="Arial" fontSize="12" fontStyle="bold" textColor="#FFFFFF">storage/db.py&#10;DuckDB</y:NodeLabel>
+          <y:Shape type="roundrectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+
+    <!-- Report -->
+    <node id="report">
+      <data key="d0">
+        <y:ShapeNode>
+          <y:Geometry x="440" y="630" width="160" height="50"/>
+          <y:Fill color="#8E44AD" transparent="false"/>
+          <y:BorderStyle color="#6C3483" type="line" width="2.0"/>
+          <y:NodeLabel alignment="center" fontFamily="Arial" fontSize="12" fontStyle="bold" textColor="#FFFFFF">analysis/report.py&#10;HTML Report (Plotly)</y:NodeLabel>
+          <y:Shape type="roundrectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+
+    <!-- Addresses config -->
+    <node id="addresses">
+      <data key="d0">
+        <y:ShapeNode>
+          <y:Geometry x="560" y="20" width="160" height="50"/>
+          <y:Fill color="#ECF0F1" transparent="false"/>
+          <y:BorderStyle color="#BDC3C7" type="line" width="1.5"/>
+          <y:NodeLabel alignment="center" fontFamily="Arial" fontSize="11" textColor="#333333">config/addresses.json&#10;25 zonas CDMX</y:NodeLabel>
+          <y:Shape type="roundrectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+
+    <!-- Edges -->
+    <edge id="e1" source="addresses" target="main">
+      <data key="d1"><y:PolyLineEdge><y:Arrows source="none" target="standard"/><y:LineStyle color="#999999" type="dashed" width="1.5"/><y:EdgeLabel>carga zonas</y:EdgeLabel></y:PolyLineEdge></data>
+    </edge>
+    <edge id="e2" source="main" target="base">
+      <data key="d1"><y:PolyLineEdge><y:Arrows source="none" target="standard"/><y:LineStyle color="#555555" type="line" width="2.0"/><y:EdgeLabel>instancia</y:EdgeLabel></y:PolyLineEdge></data>
+    </edge>
+    <edge id="e3" source="base" target="rappi">
+      <data key="d1"><y:PolyLineEdge><y:Arrows source="none" target="standard"/><y:LineStyle color="#555555" type="line" width="1.5"/></y:PolyLineEdge></data>
+    </edge>
+    <edge id="e4" source="base" target="ubereats">
+      <data key="d1"><y:PolyLineEdge><y:Arrows source="none" target="standard"/><y:LineStyle color="#555555" type="line" width="1.5"/></y:PolyLineEdge></data>
+    </edge>
+    <edge id="e5" source="base" target="didi">
+      <data key="d1"><y:PolyLineEdge><y:Arrows source="none" target="standard"/><y:LineStyle color="#555555" type="line" width="1.5"/></y:PolyLineEdge></data>
+    </edge>
+    <edge id="e6" source="rappi" target="playwright">
+      <data key="d1"><y:PolyLineEdge><y:Arrows source="none" target="standard"/><y:LineStyle color="#2E86AB" type="line" width="1.5"/></y:PolyLineEdge></data>
+    </edge>
+    <edge id="e7" source="ubereats" target="playwright">
+      <data key="d1"><y:PolyLineEdge><y:Arrows source="none" target="standard"/><y:LineStyle color="#2E86AB" type="line" width="1.5"/></y:PolyLineEdge></data>
+    </edge>
+    <edge id="e8" source="didi" target="playwright">
+      <data key="d1"><y:PolyLineEdge><y:Arrows source="none" target="standard"/><y:LineStyle color="#2E86AB" type="line" width="1.5"/></y:PolyLineEdge></data>
+    </edge>
+    <edge id="e9" source="playwright" target="rappi_api">
+      <data key="d1"><y:PolyLineEdge><y:Arrows source="none" target="standard"/><y:LineStyle color="#FF6900" type="line" width="1.5"/><y:EdgeLabel>API calls + login</y:EdgeLabel></y:PolyLineEdge></data>
+    </edge>
+    <edge id="e10" source="playwright" target="ue_api">
+      <data key="d1"><y:PolyLineEdge><y:Arrows source="none" target="standard"/><y:LineStyle color="#142328" type="line" width="1.5"/><y:EdgeLabel>API + HTML</y:EdgeLabel></y:PolyLineEdge></data>
+    </edge>
+    <edge id="e11" source="playwright" target="didi_web">
+      <data key="d1"><y:PolyLineEdge><y:Arrows source="none" target="standard"/><y:LineStyle color="#FF8000" type="line" width="1.5"/><y:EdgeLabel>HTML SSR (1 vez)</y:EdgeLabel></y:PolyLineEdge></data>
+    </edge>
+    <edge id="e12" source="main" target="duckdb">
+      <data key="d1"><y:PolyLineEdge><y:Arrows source="none" target="standard"/><y:LineStyle color="#27AE60" type="line" width="2.0"/><y:EdgeLabel>ingest_dataframe</y:EdgeLabel></y:PolyLineEdge></data>
+    </edge>
+    <edge id="e13" source="main" target="report">
+      <data key="d1"><y:PolyLineEdge><y:Arrows source="none" target="standard"/><y:LineStyle color="#8E44AD" type="line" width="2.0"/><y:EdgeLabel>generate_report</y:EdgeLabel></y:PolyLineEdge></data>
+    </edge>
+
+  </graph>
+</graphml>

@@ -1,0 +1,227 @@
+[
+  {
+    "id": 1,
+    "zone": "polanco",
+    "zone_type": "alto_poder_adquisitivo",
+    "address": "Presidente Masaryk 513, Polanco V Secc, Miguel Hidalgo, 11560 Ciudad de México",
+    "lat": 19.4322,
+    "lng": -99.1966,
+    "notes": "Zona comercial premium, alta densidad de restaurantes"
+  },
+  {
+    "id": 2,
+    "zone": "polanco",
+    "zone_type": "alto_poder_adquisitivo",
+    "address": "Av. Ejército Nacional 843, Granada, Miguel Hidalgo, 11520 Ciudad de México",
+    "lat": 19.4366,
+    "lng": -99.2014,
+    "notes": "Antara Fashion Hall, zona corporativa"
+  },
+  {
+    "id": 3,
+    "zone": "lomas",
+    "zone_type": "alto_poder_adquisitivo",
+    "address": "Paseo de las Palmas 735, Lomas de Chapultepec, 11000 Ciudad de México",
+    "lat": 19.4280,
+    "lng": -99.2140,
+    "notes": "Lomas residencial, NSE A/B"
+  },
+  {
+    "id": 4,
+    "zone": "santa_fe",
+    "zone_type": "alto_poder_adquisitivo",
+    "address": "Av. Vasco de Quiroga 3800, Santa Fe, Cuajimalpa, 05109 Ciudad de México",
+    "lat": 19.3598,
+    "lng": -99.2630,
+    "notes": "Centro corporativo Santa Fe"
+  },
+  {
+    "id": 5,
+    "zone": "interlomas",
+    "zone_type": "alto_poder_adquisitivo",
+    "address": "Av. Jesús del Monte 41, Interlomas, Huixquilucan, 52760 Estado de México",
+    "lat": 19.4050,
+    "lng": -99.2850,
+    "notes": "Zona residencial premium EdoMex"
+  },
+  {
+    "id": 6,
+    "zone": "roma_norte",
+    "zone_type": "clase_media_alta",
+    "address": "Álvaro Obregón 130, Roma Norte, Cuauhtémoc, 06700 Ciudad de México",
+    "lat": 19.4190,
+    "lng": -99.1610,
+    "notes": "Roma Norte, alta concentración de restaurantes"
+  },
+  {
+    "id": 7,
+    "zone": "condesa",
+    "zone_type": "clase_media_alta",
+    "address": "Tamaulipas 202, Condesa, Cuauhtémoc, 06140 Ciudad de México",
+    "lat": 19.4148,
+    "lng": -99.1731,
+    "notes": "Condesa, zona gastronómica popular"
+  },
+  {
+    "id": 8,
+    "zone": "narvarte",
+    "zone_type": "clase_media_alta",
+    "address": "Insurgentes Sur 611, Narvarte Poniente, Benito Juárez, 03020 Ciudad de México",
+    "lat": 19.3990,
+    "lng": -99.1610,
+    "notes": "Narvarte, alta densidad residencial"
+  },
+  {
+    "id": 9,
+    "zone": "del_valle",
+    "zone_type": "clase_media_alta",
+    "address": "Av. División del Norte 1608, Del Valle Sur, Benito Juárez, 03104 Ciudad de México",
+    "lat": 19.3850,
+    "lng": -99.1590,
+    "notes": "Del Valle, zona familiar de clase media"
+  },
+  {
+    "id": 10,
+    "zone": "coyoacan",
+    "zone_type": "clase_media_alta",
+    "address": "Francisco Sosa 383, Del Carmen, Coyoacán, 04100 Ciudad de México",
+    "lat": 19.3500,
+    "lng": -99.1620,
+    "notes": "Coyoacán centro, zona cultural y gastronómica"
+  },
+  {
+    "id": 11,
+    "zone": "centro_historico",
+    "zone_type": "centro_mixto",
+    "address": "Madero 73, Centro Histórico, Cuauhtémoc, 06000 Ciudad de México",
+    "lat": 19.4326,
+    "lng": -99.1332,
+    "notes": "Centro histórico, alto tráfico turístico"
+  },
+  {
+    "id": 12,
+    "zone": "doctores",
+    "zone_type": "centro_mixto",
+    "address": "Av. Cuauhtémoc 148, Doctores, Cuauhtémoc, 06720 Ciudad de México",
+    "lat": 19.4180,
+    "lng": -99.1450,
+    "notes": "Zona de hospitales, NSE C"
+  },
+  {
+    "id": 13,
+    "zone": "tepito",
+    "zone_type": "centro_mixto",
+    "address": "Toltecas 40, Morelos, Cuauhtémoc, 06200 Ciudad de México",
+    "lat": 19.4420,
+    "lng": -99.1280,
+    "notes": "Tepito/Morelos, NSE C/D, alta densidad"
+  },
+  {
+    "id": 14,
+    "zone": "tlatelolco",
+    "zone_type": "centro_mixto",
+    "address": "Manuel González 310, Nonoalco Tlatelolco, Cuauhtémoc, 06900 Ciudad de México",
+    "lat": 19.4500,
+    "lng": -99.1410,
+    "notes": "Tlatelolco, unidad habitacional grande"
+  },
+  {
+    "id": 15,
+    "zone": "peralvillo",
+    "zone_type": "centro_mixto",
+    "address": "Circunvalación 10, Peralvillo, Cuauhtémoc, 06220 Ciudad de México",
+    "lat": 19.4480,
+    "lng": -99.1340,
+    "notes": "Peralvillo, NSE C/D"
+  },
+  {
+    "id": 16,
+    "zone": "iztapalapa_centro",
+    "zone_type": "periferia",
+    "address": "Av. Ermita Iztapalapa 1930, Barrio San Miguel, Iztapalapa, 09360 Ciudad de México",
+    "lat": 19.3650,
+    "lng": -99.0730,
+    "notes": "Iztapalapa centro, alcaldía más poblada"
+  },
+  {
+    "id": 17,
+    "zone": "iztapalapa_sur",
+    "zone_type": "periferia",
+    "address": "Av. Tláhuac 3450, Desarrollo Urbano Quetzalcóatl, Iztapalapa, 09700 Ciudad de México",
+    "lat": 19.3200,
+    "lng": -99.0600,
+    "notes": "Iztapalapa sur, cobertura delivery limitada"
+  },
+  {
+    "id": 18,
+    "zone": "ecatepec",
+    "zone_type": "periferia",
+    "address": "Av. Central 100, Las Américas, Ecatepec de Morelos, 55076 Estado de México",
+    "lat": 19.5500,
+    "lng": -99.0300,
+    "notes": "Ecatepec, ciudad dormitorio NSE C/D"
+  },
+  {
+    "id": 19,
+    "zone": "chimalhuacan",
+    "zone_type": "periferia",
+    "address": "Av. Bordo de Xochiaca S/N, Chimalhuacán, 56330 Estado de México",
+    "lat": 19.4200,
+    "lng": -98.9500,
+    "notes": "Chimalhuacán, periferia lejana"
+  },
+  {
+    "id": 20,
+    "zone": "nezahualcoyotl",
+    "zone_type": "periferia",
+    "address": "Av. Texcoco 103, Ciudad Nezahualcóyotl, 57000 Estado de México",
+    "lat": 19.4000,
+    "lng": -99.0150,
+    "notes": "Neza, zona metropolitana densa"
+  },
+  {
+    "id": 21,
+    "zone": "tlalpan",
+    "zone_type": "sur",
+    "address": "Calzada de Tlalpan 4868, Villa Coapa, Tlalpan, 14390 Ciudad de México",
+    "lat": 19.2990,
+    "lng": -99.1300,
+    "notes": "Tlalpan norte, cerca de Perisur"
+  },
+  {
+    "id": 22,
+    "zone": "xochimilco",
+    "zone_type": "sur",
+    "address": "Guadalupe I. Ramírez 12, Barrio 18, Xochimilco, 16090 Ciudad de México",
+    "lat": 19.2570,
+    "lng": -99.1020,
+    "notes": "Xochimilco, zona periférica sur"
+  },
+  {
+    "id": 23,
+    "zone": "pedregal",
+    "zone_type": "sur",
+    "address": "Periférico Sur 3720, Jardines del Pedregal, Álvaro Obregón, 01900 Ciudad de México",
+    "lat": 19.3300,
+    "lng": -99.2000,
+    "notes": "Pedregal, NSE A/B sur"
+  },
+  {
+    "id": 24,
+    "zone": "contreras",
+    "zone_type": "sur",
+    "address": "Camino a Santa Teresa 1000, La Magdalena Contreras, 10200 Ciudad de México",
+    "lat": 19.3100,
+    "lng": -99.2200,
+    "notes": "Contreras, zona residencial sur-poniente"
+  },
+  {
+    "id": 25,
+    "zone": "tlahuac",
+    "zone_type": "sur",
+    "address": "Av. Tláhuac 5800, Selene, Tláhuac, 13420 Ciudad de México",
+    "lat": 19.2800,
+    "lng": -99.0100,
+    "notes": "Tláhuac, periferia sur-oriente, cobertura mínima"
+  }
+]

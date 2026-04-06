@@ -1,0 +1,51 @@
+# ── Datos generados por el scraper ─────────────────────────────────────────
+data/raw/
+data/scraper.log
+data/competitive_intel.duckdb
+data/report.html
+
+# Mantener la carpeta data/ en el repo
+!data/.gitkeep
+
+# ── Entorno y secretos ──────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+credentials.json
+*.pem
+*.key
+
+# ── Python ──────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# ── Entornos virtuales ──────────────────────────────────────────────────────
+venv/
+env/
+.venv/
+
+# ── IDEs ─────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# ── Playwright ──────────────────────────────────────────────────────────────
+playwright-report/
+test-results/
+
+# ── Logs ────────────────────────────────────────────────────────────────────
+*.log
+
+# ── Temporales ──────────────────────────────────────────────────────────────
+*.tmp
+*.bak
+.claude/
