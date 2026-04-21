@@ -58,8 +58,6 @@ PATRONES_INTERCEPCION = [
 
 PATRON_API_TIENDA = "restaurants-bus/store/id/"
 
-# NOTA: McDonald's no opera en Rappi Mexico — es exclusivo de Uber Eats.
-# Carl's Jr y Burger King si estan disponibles en Rappi CDMX.
 RESTAURANTES_OBJETIVO = ["burger king", "carl's jr", "carl jr", "oxxo", "7-eleven", "seven eleven"]
 
 

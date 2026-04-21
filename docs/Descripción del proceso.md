@@ -218,7 +218,6 @@ DiDi Food no tiene datos por zona en su web. El catálogo es a nivel ciudad (CDM
 ## PASO 7 — Scraper de Rappi (`scrapers/rappi.py`)
 
 **Restaurantes objetivo:** Burger King, Carl's Jr, OXXO, 7-Eleven
-*(McDonald's no opera en Rappi México — es exclusivo de Uber Eats)*
 
 ### 7.1 — Por cada dirección (`scrape_address`)
 1. Limpia capturas e historial de cookies del contexto

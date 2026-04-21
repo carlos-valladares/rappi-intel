@@ -74,7 +74,7 @@ Browser abre rappi.com.mx
 Mejora futura: POST /api/rocket/v2/login {email, password} → token autenticado
     → desbloquea percentage_service_fee con valor real.
 
-Nota: McDonald's no opera en Rappi México (exclusivo de Uber Eats).
+
 ```
 
 ### `scrapers/ubereats.py` — Uber Eats (API + HTML)

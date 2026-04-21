@@ -159,6 +159,12 @@ async def main(args):
     ingest_dataframe(df)
     console.print(f"\n[green]OK[/green] Data stored in DuckDB")
 
+    # Save combined CSV with all platforms
+    ts = time.strftime("%Y%m%d_%H%M%S")
+    csv_combinado = Path("data/raw") / f"todos_{ts}.csv"
+    df.to_csv(csv_combinado, index=False, encoding="utf-8-sig")
+    console.print(f"[green]OK[/green] CSV combinado: {csv_combinado}")
+
     # Summary table
     print_summary(all_results)
 

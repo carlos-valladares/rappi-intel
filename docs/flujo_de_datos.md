@@ -42,7 +42,7 @@ config/addresses.json (25 zonas)
 3. Intercepta GET catalog-paged/home → { stores[] }
 4. _parsear_interceptadas():
       Para cada store con brand_name en RESTAURANTES_OBJETIVO
-      (Burger King, Carl's Jr, OXXO, 7-Eleven — NO McDonald's):
+      (Burger King, Carl's Jr, OXXO, 7-Eleven):
         → registro con delivery_price, eta, rating, descuentos, store_id
 5. _extraer_token() → self._bearer_token
 6. _enriquecer_precios_producto():

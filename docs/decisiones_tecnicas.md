@@ -175,23 +175,20 @@ Sin stealth, el scraper es bloqueado en < 3 requests.
 
 ---
 
-## DT-09 — Hallazgo competitivo: McDonald's exclusivo de Uber Eats en México
+## DT-09 — Targets de Rappi: incluir Carl's Jr
 
-**Decisión:** Excluir McDonald's de los targets de Rappi; agregar Carl's Jr como
-target de Rappi en su lugar.
+**Decisión:** Incluir Carl's Jr como target de Rappi además de Burger King, OXXO y 7-Eleven.
 
-**Contexto:** Al ejecutar el sistema, McDonald's no apareció en ninguna respuesta
-de la API de Rappi para CDMX. Se verificó el catálogo completo retornado — más de
-90 marcas — sin ninguna entrada de McDonald's.
+**Contexto:** McDonald's no apareció en las respuestas de la API de Rappi durante las
+zonas analizadas. Puede deberse a cobertura de zonas, configuración del scraper, o
+disponibilidad real — pendiente de verificar con más zonas.
 
 **Razonamiento:**
-- McDonald's opera en México exclusivamente a través de Uber Eats (acuerdo comercial)
 - Carl's Jr sí está disponible en Rappi CDMX con precios y ETAs accesibles
-- Mantener McDonald's como target de Rappi generaría cero registros: ruido sin valor
+- Agrega un segundo punto de comparación en la vertical de fast food junto a Burger King
 
 **Impacto:** `RESTAURANTES_OBJETIVO` en `rappi.py` incluye Carl's Jr; `PRODUCTOS_OBJETIVO`
-en `base.py` mapea `"carl's jr"` → `"Famous Star"`. McDonald's sigue como target en
-Uber Eats y DiDi Food. Este hallazgo es en sí mismo un dato de inteligencia competitiva.
+en `base.py` mapea `"carl's jr"` → `"Famous Star"`.
 
 ---
 

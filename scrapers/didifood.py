@@ -197,14 +197,14 @@ class DidiScraper(ScraperBase):
         for r in restaurantes_ciudad:
             rec = self._registro_base(direccion)
             rec["nombre_restaurante"] = r["nombre_restaurante"]
-            rec["restaurante_disponible"] = True
+            rec["restaurante_disponible"] = None  # No disponible en web de DiDi
             rec["calificacion"] = r.get("calificacion")
             rec["costo_envio"] = None       # Solo disponible en app
             rec["costo_servicio"] = None    # Solo disponible en app
             rec["tiempo_entrega_min"] = None  # Solo disponible en app
             rec["tiempo_entrega_max"] = None  # Solo disponible en app
             rec["vertical"] = r.get("vertical", "fast_food")
-            rec["descuento_activo"] = False
+            rec["descuento_activo"] = None  # No disponible en web de DiDi
             rec["nombre_producto"] = r.get("nombre_producto")
             rec["precio_producto"] = r.get("precio_producto")
             rec["estado_scraping"] = "ok"
