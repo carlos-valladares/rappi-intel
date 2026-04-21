@@ -101,7 +101,7 @@ CREATE TABLE datos_competencia (
     plataforma           VARCHAR,      -- 'rappi' | 'ubereats' | 'didifood'
     id_direccion         INTEGER,
     zona                 VARCHAR,
-    tipo_zona            VARCHAR,      -- 'premium' | 'residencial' | 'popular' | 'comercial'
+    tipo_zona            VARCHAR,      -- 'alto_poder_adquisitivo' | 'clase_media_alta' | 'centro_mixto' | 'periferia' | 'sur'
     direccion            VARCHAR,
     lat                  DOUBLE,
     lng                  DOUBLE,

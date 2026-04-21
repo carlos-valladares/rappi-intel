@@ -86,6 +86,7 @@ class RappiScraper(ScraperBase):
                 wait_until="domcontentloaded",
                 timeout=35000,
             )
+            await pagina.evaluate("() => { try { localStorage.clear(); sessionStorage.clear(); } catch(e) {} }")
             await asyncio.sleep(8)
 
             registros = await self._raspar_con_direccion(pagina, direccion, contexto)

@@ -48,6 +48,7 @@ class UberEatsScraper(ScraperBase):
 
     async def scrape_address(self, direccion: dict, contexto: BrowserContext) -> list[dict]:
         self._interceptadas.clear()
+        await contexto.clear_cookies()
         pagina = await contexto.new_page()
         registros = []
         try:
@@ -60,6 +61,7 @@ class UberEatsScraper(ScraperBase):
             # Esto desbloquearia: delivery fee real (actualmente $0 por promo nuevos usuarios).
 
             await pagina.goto("https://www.ubereats.com/mx", wait_until="domcontentloaded", timeout=30000)
+            await pagina.evaluate("() => { try { localStorage.clear(); sessionStorage.clear(); } catch(e) {} }")
             await asyncio.sleep(6)
             registros = await self._raspar_con_direccion(pagina, direccion)
             self.save_intercepted()
@@ -194,7 +196,7 @@ class UberEatsScraper(ScraperBase):
             try:
                 # ── Llamada API getStoreV1 ─────────────────────────────────
                 if store_uuid:
-                    clave_cache = nombre_rest
+                    clave_cache = store_uuid
                     if clave_cache in UberEatsScraper._cache_precios:
                         cached = UberEatsScraper._cache_precios[clave_cache]
                         rec["precio_producto"] = cached.get("precio")

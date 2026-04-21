@@ -122,10 +122,11 @@ Requieren API móvil (wsgsig), fuera del alcance actual.
 
 | Tipo de Zona | Ejemplos |
 |---|---|
-| `premium` | Polanco, Lomas de Chapultepec, Santa Fe |
-| `residencial` | Coyoacán, Del Valle, Narvarte |
-| `popular` | Iztapalapa, Ecatepec, Xochimilco |
-| `comercial` | Centro Histórico, Insurgentes, Pedregal |
+| `alto_poder_adquisitivo` | Polanco, Lomas de Chapultepec, Santa Fe, Interlomas |
+| `clase_media_alta` | Roma Norte, Condesa, Narvarte, Del Valle, Coyoacán |
+| `centro_mixto` | Centro Histórico, Doctores, Tepito, Tlatelolco, Peralvillo |
+| `periferia` | Iztapalapa, Ecatepec, Chimalhuacán, Nezahualcóyotl |
+| `sur` | Tlalpan, Xochimilco, Pedregal, Contreras, Tláhuac |
 
 ## Modelo de Datos
 

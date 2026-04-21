@@ -63,12 +63,9 @@ def resumen() -> pd.DataFrame:
             plataforma,
             COUNT(*) as total_registros,
             COUNT(DISTINCT zona) as zonas,
-            COUNT(DISTINCT nombre_restaurante) as restaurantes,
             AVG(costo_envio) as costo_envio_promedio,
             AVG(tiempo_entrega_min) as eta_promedio_min,
-            SUM(CASE WHEN descuento_activo THEN 1 ELSE 0 END) as con_descuentos,
-            COUNT(precio_producto) as con_precio_producto,
-            AVG(precio_producto) as precio_producto_promedio
+            COUNT(precio_producto) as con_precio_producto
         FROM datos_competencia
         WHERE estado_scraping = 'ok'
         GROUP BY plataforma

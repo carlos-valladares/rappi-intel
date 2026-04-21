@@ -179,76 +179,132 @@ def generar_insights(df: pd.DataFrame) -> list[dict]:
     """Calcular top 5 insights estrategicos desde los datos."""
     insights = []
 
-    # 1. Comparacion de costo de envio
-    fee_avg = df.groupby("plataforma")["costo_envio"].mean()
-    if not fee_avg.empty and "rappi" in fee_avg and len(fee_avg) > 1:
-        competidores = {k: v for k, v in fee_avg.items() if k != "rappi"}
-        mejor_comp = min(competidores, key=competidores.get)
-        diff = ((fee_avg["rappi"] - competidores[mejor_comp]) / competidores[mejor_comp]) * 100
-        insights.append({
-            "numero": 1,
-            "icono": "💸",
-            "hallazgo": f"El costo de envio de Rappi es {abs(diff):.0f}% {'mas caro' if diff > 0 else 'mas barato'} que {mejor_comp.title()} en promedio",
-            "impacto": "El costo de envio es la metrica mas visible al elegir plataforma. Diferencias >20% afectan la conversion.",
-            "recomendacion": f"{'Revisar estructura de fees en zonas de alta competencia.' if diff > 15 else 'Mantener pricing actual — ventaja competitiva en fees.'}",
-        })
+    # Plataformas con datos reales de envio (excluye UberEats: $0 es promo nuevos usuarios, no precio real)
+    plataformas_con_envio_real = ["rappi"]
 
-    # 2. Comparacion de ETA
-    eta_avg = df.groupby("plataforma")["tiempo_entrega_min"].mean()
-    if not eta_avg.empty and "rappi" in eta_avg and len(eta_avg) > 1:
-        comp_eta = {k: v for k, v in eta_avg.items() if k != "rappi"}
-        mejor_eta = min(comp_eta, key=comp_eta.get)
-        diff_min = eta_avg["rappi"] - comp_eta[mejor_eta]
-        insights.append({
-            "numero": 2,
-            "icono": "⏱️",
-            "hallazgo": f"Rappi tiene ETAs {abs(diff_min):.0f} min {'mas lentos' if diff_min > 0 else 'mas rapidos'} que {mejor_eta.title()}",
-            "impacto": "El tiempo de entrega es el segundo factor de decision. Diferencias >10 min reducen conversion.",
-            "recomendacion": "Revisar densidad de repartidores en zonas con mayor desventaja de tiempo.",
-        })
-
-    # 3. Variabilidad geografica
+    # 1. Variabilidad geografica del costo de envio de Rappi por tipo de zona
+    # (unica plataforma con datos reales de envio en esta version)
     var_zona = (
         df[df["plataforma"] == "rappi"].groupby("tipo_zona")["costo_envio"].mean()
         if "rappi" in df["plataforma"].values
         else pd.Series()
     )
+    var_zona = var_zona.dropna()
     if not var_zona.empty and len(var_zona) > 1:
         zona_max = var_zona.idxmax()
         zona_min = var_zona.idxmin()
         diff = var_zona.max() - var_zona.min()
         insights.append({
-            "numero": 3,
-            "icono": "🗺️",
-            "hallazgo": f"Rappi cobra {diff:.0f} MXN mas de envio en '{zona_max}' vs '{zona_min}'",
-            "impacto": "Alta variabilidad geografica puede alejar usuarios en zonas perifericas.",
-            "recomendacion": f"Investigar densidad de repartidores en '{zona_max}'. Evaluar ajuste de precios por zona.",
+            "numero": 1,
+            "icono": "💸",
+            "hallazgo": f"El costo de envio de Rappi varia {diff:.0f} MXN entre zonas: '{zona_max}' es la mas cara y '{zona_min}' la mas barata",
+            "impacto": "La variabilidad geografica de fees puede alejar usuarios en zonas de mayor costo. Dato exclusivo de Rappi: Uber Eats muestra $0 por promo de nuevos usuarios (no es el precio real) y DiDi Food no expone este dato en su sitio web.",
+            "recomendacion": f"Verificar si la diferencia refleja mayor distancia de repartidores en '{zona_max}' o es una decision de pricing. Evaluar si un fee mas uniforme mejora la conversion en esa zona.",
+        })
+    elif "rappi" in df["plataforma"].values:
+        fee_rappi = df[df["plataforma"] == "rappi"]["costo_envio"].mean()
+        if pd.notna(fee_rappi):
+            insights.append({
+                "numero": 1,
+                "icono": "💸",
+                "hallazgo": f"El costo de envio promedio de Rappi en las zonas analizadas es MXN${fee_rappi:.0f}",
+                "impacto": "Dato exclusivo de Rappi: Uber Eats muestra $0 por promo de nuevos usuarios y DiDi Food no expone fees en su sitio web. Se requieren credenciales de usuario para obtener el fee real de Uber Eats.",
+                "recomendacion": "Ejecutar el scraper con cuenta de usuario normal (--ubereats-email) para comparar fees reales entre plataformas.",
+            })
+
+    # 2. Comparacion de ETA — solo Rappi vs Uber Eats (DiDi no tiene datos de ETA)
+    df_con_eta = df[df["plataforma"].isin(["rappi", "ubereats"])]
+    eta_avg = df_con_eta.groupby("plataforma")["tiempo_entrega_min"].mean().dropna()
+    if not eta_avg.empty and "rappi" in eta_avg and "ubereats" in eta_avg:
+        diff_min = eta_avg["rappi"] - eta_avg["ubereats"]
+        insights.append({
+            "numero": 2,
+            "icono": "⏱️",
+            "hallazgo": f"Rappi tiene ETAs {abs(diff_min):.0f} min {'mas lentos' if diff_min > 0 else 'mas rapidos'} que Uber Eats en promedio ({eta_avg['rappi']:.0f} vs {eta_avg['ubereats']:.0f} min)",
+            "impacto": "El tiempo de entrega es el segundo factor de decision tras el precio. Diferencias mayores a 10 min reducen la conversion. DiDi Food no incluido: no expone tiempos de entrega en su sitio web.",
+            "recomendacion": f"{'Priorizar densidad de repartidores en las zonas con mayor brecha de ETA vs Uber Eats.' if diff_min > 5 else 'ETAs competitivos — mantener la estrategia de asignacion de repartidores actual.'}",
+        })
+    elif "rappi" in eta_avg:
+        insights.append({
+            "numero": 2,
+            "icono": "⏱️",
+            "hallazgo": f"ETA promedio de Rappi: {eta_avg['rappi']:.0f} min. No se pudo comparar con Uber Eats en esta corrida.",
+            "impacto": "Sin datos de ETA de Uber Eats no es posible establecer la brecha competitiva.",
+            "recomendacion": "Revisar los logs para identificar por que Uber Eats no capturo datos de tiempo de entrega.",
         })
 
-    # 4. Agresividad de descuentos
-    tasa_desc = df.groupby("plataforma")["descuento_activo"].mean() * 100
-    if not tasa_desc.empty and "rappi" in tasa_desc and len(tasa_desc) > 1:
-        comp_max_desc = tasa_desc.drop("rappi").idxmax()
-        diff = tasa_desc[comp_max_desc] - tasa_desc["rappi"]
+    # 3. Precios de producto — comparacion Rappi vs Uber Eats por producto
+    # (los unicos con precios reales; DiDi no expone precios en web)
+    df_precios = df[df["plataforma"].isin(["rappi", "ubereats"])].dropna(subset=["precio_producto", "nombre_producto"])
+    if not df_precios.empty:
+        productos_comunes = (
+            df_precios.groupby("nombre_producto")["plataforma"]
+            .nunique()
+        )
+        productos_comparables = productos_comunes[productos_comunes > 1].index.tolist()
+
+        if productos_comparables:
+            producto = productos_comparables[0]
+            precios = df_precios[df_precios["nombre_producto"] == producto].groupby("plataforma")["precio_producto"].mean()
+            if "rappi" in precios and "ubereats" in precios:
+                diff_precio = precios["rappi"] - precios["ubereats"]
+                insights.append({
+                    "numero": 3,
+                    "icono": "🏷️",
+                    "hallazgo": f"{producto}: Rappi MXN${precios['rappi']:.0f} vs Uber Eats MXN${precios['ubereats']:.0f} — Rappi es {'MXN$' + str(abs(round(diff_precio))) + ' mas caro' if diff_precio > 0 else 'MXN$' + str(abs(round(diff_precio))) + ' mas barato'}",
+                    "impacto": "El precio del producto es la metrica mas directa de competitividad. DiDi Food no incluido: no expone precios de menu en su sitio web.",
+                    "recomendacion": f"{'Revisar la politica de precios de producto en Rappi para los items donde Uber Eats es mas barato.' if diff_precio > 5 else 'Precios competitivos — no se requiere ajuste inmediato.'}",
+                })
+        else:
+            # No hay productos comparables entre plataformas — mostrar lo que tiene Rappi
+            precio_rappi = df_precios[df_precios["plataforma"] == "rappi"].groupby("nombre_producto")["precio_producto"].mean()
+            if not precio_rappi.empty:
+                resumen_precios = ", ".join([f"{p}: MXN${v:.0f}" for p, v in precio_rappi.items()])
+                insights.append({
+                    "numero": 3,
+                    "icono": "🏷️",
+                    "hallazgo": f"Precios capturados en Rappi: {resumen_precios}",
+                    "impacto": "No se encontraron productos comunes entre plataformas para comparar directamente. Uber Eats y Rappi ofrecen diferentes cadenas (McDonald's es exclusivo de Uber Eats; Carl's Jr solo en Rappi).",
+                    "recomendacion": "Usar Whopper como producto de referencia comun entre Rappi y Uber Eats para futuras comparaciones.",
+                })
+
+    # 4. Agresividad de descuentos — solo Rappi vs Uber Eats
+    # (DiDi Food no expone descuentos en su sitio web — excluido para no distorsionar)
+    df_desc = df[df["plataforma"].isin(["rappi", "ubereats"])]
+    tasa_desc = df_desc.groupby("plataforma")["descuento_activo"].mean() * 100
+    if not tasa_desc.empty and "rappi" in tasa_desc and "ubereats" in tasa_desc:
+        diff = tasa_desc["ubereats"] - tasa_desc["rappi"]
         insights.append({
             "numero": 4,
             "icono": "🎁",
-            "hallazgo": f"{comp_max_desc.title()} tiene {abs(diff):.0f}% {'mas' if diff > 0 else 'menos'} descuentos activos que Rappi",
-            "impacto": "Las promociones son driver clave de primera compra y reactivacion.",
-            "recomendacion": f"{'Aumentar cobertura de promociones donde el competidor es mas agresivo.' if diff > 10 else 'Rappi lidera en promociones — mantener estrategia.'}",
+            "hallazgo": f"Uber Eats tiene descuentos activos en el {tasa_desc['ubereats']:.0f}% de sus tiendas vs {tasa_desc['rappi']:.0f}% en Rappi",
+            "impacto": "Las promociones son driver clave de primera compra y reactivacion. DiDi Food excluido de esta comparacion: su sitio web no expone informacion de descuentos activos.",
+            "recomendacion": f"{'Uber Eats es mas agresivo en promociones — evaluar aumentar cobertura de descuentos en Rappi para las mismas zonas.' if diff > 10 else 'Rappi es competitivo en promociones respecto a Uber Eats — mantener estrategia actual.'}",
         })
 
-    # 5. Disponibilidad
-    disponibilidad = df.groupby("plataforma")["restaurante_disponible"].mean() * 100
-    if not disponibilidad.empty and "rappi" in disponibilidad and len(disponibilidad) > 1:
-        comp_disp = {k: v for k, v in disponibilidad.items() if k != "rappi"}
-        insights.append({
-            "numero": 5,
-            "icono": "🏪",
-            "hallazgo": f"Disponibilidad Rappi: {disponibilidad.get('rappi', 0):.0f}% vs competencia promedio: {sum(comp_disp.values())/len(comp_disp):.0f}%",
-            "impacto": "Mas restaurantes disponibles = mayor probabilidad de conversion en cualquier horario.",
-            "recomendacion": "Priorizar acuerdos con restaurantes en zonas donde la cobertura es inferior a competencia.",
-        })
+    # 5. Zonas con mayor costo de envio en Rappi (heatmap)
+    # Identifica las zonas especificas donde Rappi cobra mas caro — dato accionable por zona
+    if "rappi" in df["plataforma"].values:
+        envio_por_zona = (
+            df[df["plataforma"] == "rappi"]
+            .groupby("zona")["costo_envio"]
+            .mean()
+            .dropna()
+            .sort_values(ascending=False)
+        )
+        if not envio_por_zona.empty:
+            zona_mas_cara = envio_por_zona.index[0]
+            zona_mas_barata = envio_por_zona.index[-1]
+            fee_max = envio_por_zona.iloc[0]
+            fee_min = envio_por_zona.iloc[-1]
+            n_zonas_sin_dato = df[df["plataforma"] == "rappi"]["zona"].nunique() - len(envio_por_zona)
+            insights.append({
+                "numero": 5,
+                "icono": "🗺️",
+                "hallazgo": f"Por zona especifica, Rappi cobra mas caro en '{zona_mas_cara}' (MXN${fee_max:.0f}) y mas barato en '{zona_mas_barata}' (MXN${fee_min:.0f}). {f'Hay {n_zonas_sin_dato} zona(s) sin dato de envio capturado.' if n_zonas_sin_dato > 0 else ''}",
+                "impacto": "El heatmap muestra donde Rappi concentra sus fees mas altos a nivel de zona individual. Estas zonas son las de mayor riesgo de perder usuarios frente a competidores con fee menor o gratuito.",
+                "recomendacion": f"Investigar si el fee alto en '{zona_mas_cara}' responde a baja densidad de repartidores o es una decision de pricing. Las zonas sin dato en el heatmap requieren revision del scraper para esa ubicacion.",
+            })
 
     if not insights:
         insights = [{
@@ -337,6 +393,9 @@ def generate_html_report(df: pd.DataFrame) -> Path:
   .tabla-resumen {{ width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }}
   .tabla-resumen th {{ background: #FF441F; color: white; padding: 12px 16px; text-align: left; }}
   .tabla-resumen td {{ padding: 10px 16px; border-bottom: 1px solid #e9ecef; }}
+  .aviso-datos {{ background: #fff8e1; border-left: 4px solid #f59e0b; border-radius: 8px; padding: 16px 20px; margin-bottom: 24px; font-size: 0.9rem; color: #78350f; }}
+  .aviso-datos strong {{ display: block; margin-bottom: 8px; font-size: 1rem; color: #92400e; }}
+  .aviso-datos ul {{ padding-left: 18px; line-height: 1.8; }}
   .footer {{ background: #343a40; color: #adb5bd; padding: 24px 60px; font-size: 0.85rem; }}
 </style>
 </head>
@@ -360,6 +419,14 @@ def generate_html_report(df: pd.DataFrame) -> Path:
 
 <div class="seccion">
   <h2>Analisis Comparativo</h2>
+  <div class="aviso-datos">
+    <strong>Limitaciones de los datos en esta version</strong>
+    <ul>
+      <li><strong>Costo de envio — Uber Eats:</strong> muestra $0 por promo de nuevos usuarios, no el precio real para usuarios recurrentes. Requiere autenticacion con cuenta existente (--ubereats-email).</li>
+      <li><strong>Costo de servicio:</strong> no disponible sin login en ninguna plataforma. Rappi retorna 0% y Uber Eats retorna nulo para sesiones sin autenticacion.</li>
+      <li><strong>DiDi Food:</strong> su sitio web no expone costo de envio, tiempos de entrega, precios de producto ni descuentos. Solo se capturan nombre de restaurante y calificacion a nivel ciudad-CDMX (no por zona). Las graficas de DiDi reflejan unicamente estos dos datos.</li>
+    </ul>
+  </div>
   <div class="grid-graficas">
     {graficas_html}
   </div>
